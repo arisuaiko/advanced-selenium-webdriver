@@ -1,6 +1,5 @@
-package com.herokuapp.theinternet;
+package com.herokuapp.theinternet.loginpagetests;
 
-import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,13 +9,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class PositiveTests {
+public class PositiveLoginTests {
 
 	@Test
 	public void logInTest() {
 		System.out.println("Starting logIn test");
 
 		// Create driver
+		System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 
@@ -32,7 +32,7 @@ public class PositiveTests {
 		driver.findElement(By.id("username")).sendKeys("tomsmith");
 		driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
 
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(driver, 10);
 
 		// push log in button
 		WebElement logInButton = driver.findElement(By.className("radius"));
