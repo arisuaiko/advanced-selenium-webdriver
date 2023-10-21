@@ -1,24 +1,20 @@
 package com.herokuapp.theinternet.loginpagetests;
 
+import base.BaseTest;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class PositiveLoginTests {
+import java.time.Duration;
+
+public class PositiveLoginTests extends BaseTest {
 
 	@Test
 	public void logInTest() {
 		System.out.println("Starting logIn test");
-
-		// Create driver
-		System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
-		WebDriver driver = new ChromeDriver();
-		driver.manage().window().maximize();
 
 		// open main page
 		String url = "http://the-internet.herokuapp.com/";
@@ -32,7 +28,7 @@ public class PositiveLoginTests {
 		driver.findElement(By.id("username")).sendKeys("tomsmith");
 		driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
 
-		WebDriverWait wait = new WebDriverWait(driver, 10);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
 		// push log in button
 		WebElement logInButton = driver.findElement(By.className("radius"));
@@ -55,7 +51,5 @@ public class PositiveLoginTests {
 				"actualSuccessMessage does not contain expectedSuccessMessage\nexpectedSuccessMessage: "
 						+ expectedSuccessMessage + "\nactualSuccessMessage: " + actualSuccessMessage);
 
-		// Close browser
-		driver.quit();
 	}
 }
