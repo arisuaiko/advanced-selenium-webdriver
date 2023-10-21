@@ -1,12 +1,12 @@
 package com.herokuapp.theinternet.loginpagetests;
 
-import base.BaseTest;
+import base.TestUtilities;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class NegativeLoginTests extends BaseTest {
+public class NegativeLoginTests extends TestUtilities {
 
 	@Parameters({ "username", "password", "expectedMessage" })
 	@Test(priority = 1)
