@@ -41,6 +41,11 @@ public class BasePageObject {
         find(locator).sendKeys(text);
     }
 
+    /** Get URL of current page from browser*/
+    public String getUrl(){
+        return driver.getCurrentUrl();
+    }
+
     /**
      * Wait for specific ExpectedCondition for the given duration
      */
