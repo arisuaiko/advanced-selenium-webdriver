@@ -5,6 +5,9 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import pages.LoginPage;
+import pages.SecureAreaPage;
+import pages.WelcomePageObject;
 
 public class NegativeLoginTests extends TestUtilities {
 
@@ -14,24 +17,21 @@ public class NegativeLoginTests extends TestUtilities {
 		log.info("Starting negativeTest");
 
 		// open main page
-		String url = "http://the-internet.herokuapp.com/";
-		driver.get(url);
-		log.info("Main page is opened.");
+		WelcomePageObject welcomePage = new WelcomePageObject(driver, log);
+		welcomePage.openPage();
 
 		// Click on Form Authentication link
-		driver.findElement(By.linkText("Form Authentication")).click();
+		LoginPage loginPage = welcomePage.clickFormAuthenticationLink();
 
-		// enter username and password
-		driver.findElement(By.id("username")).sendKeys(username);
-		driver.findElement(By.id("password")).sendKeys(password);
+		// execute log in (enter username, password and click log in button)
+		loginPage.negativeLogIn(username,password);
 
-		// push log in button
-		driver.findElement(By.className("radius")).click();
+		//wait for the error message
+		loginPage.waitForErrorMessage();
+		String message = loginPage.getErrorMessageText();
 
 		// Verification
-		String actualErrorMessage = driver.findElement(By.id("flash")).getText();
-		Assert.assertTrue(actualErrorMessage.contains(expectedErrorMessage),
-				"actualErrorMessage does not contain expectedErrorMessage\nexpectedErrorMessage: "
-						+ expectedErrorMessage + "\nactualErrorMessage: " + actualErrorMessage);
+		Assert.assertTrue(message.contains(expectedErrorMessage),
+				"Message doesn't contain expected text.");
 	}
 }

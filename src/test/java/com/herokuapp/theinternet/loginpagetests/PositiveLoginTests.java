@@ -20,7 +20,7 @@ public class PositiveLoginTests extends TestUtilities {
 		// Click on Form Authentication link
 		LoginPage loginPage = welcomePage.clickFormAuthenticationLink();
 
-		// execute log in
+		// execute log in (enter username, password and click log in button)
 		SecureAreaPage secureAreaPage = loginPage.logIn("tomsmith","SuperSecretPassword!");
 
 		// verifications
